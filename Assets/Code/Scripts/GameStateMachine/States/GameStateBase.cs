@@ -10,7 +10,8 @@
             OnInit();
         }
 
-        public abstract void OnInit();
+        protected abstract void OnInit();
+
         public abstract void Process();
         public abstract void Deinit();
     }

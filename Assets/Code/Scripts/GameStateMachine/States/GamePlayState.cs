@@ -18,10 +18,11 @@ namespace Core
             _gamePlaySessionTimer = gamePlaySessionTimer;
         }
 
-        public override void OnInit()
+        protected override void OnInit()
         {
             _gamePlaySessionTimer.OnTick += HandleTimerTick;
         }
+
         public override void Process()
         {
             _gameUI = _uiSystem.ShowWindowFromPrefab(_gameUIPrefab);

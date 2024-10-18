@@ -15,9 +15,10 @@ namespace Core
             _uiSystem = uiSystem;
         }
 
-        public override void OnInit()
+        protected override void OnInit()
         {
         }
+
         public async override void Process()
         {
             Queue<ILoadingOperation> queue = new Queue<ILoadingOperation>();
