@@ -1,5 +1,3 @@
-using Zenject;
-
 namespace Core
 {
     public class GameStateMachine
@@ -31,21 +29,5 @@ namespace Core
         public abstract void Init();
         public abstract void Process();
         public abstract void Deinit();
-    }
-
-    public class LoadingState : GameStateBase
-    {
-        public override void Init()
-        {
-            throw new System.NotImplementedException();
-        }
-        public override void Process()
-        {
-            throw new System.NotImplementedException();
-        }
-        public override void Deinit()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
