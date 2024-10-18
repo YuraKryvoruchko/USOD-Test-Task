@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core.UI
 {
     public interface IUISystem
     {
-        void ShowLoadingScreenAndDestroy(Queue<ILoadingOperation> loadingOperations);
+        LoadingScreen ShowAndGetLoadingScreen(Queue<ILoadingOperation> loadingOperations);
+        void ReturnLoadingScreen();
     }
     public class UISystem : IUISystem
     {
+        private LoadingScreen _currentLoadingScreen;
+
         private ConstructorArguments _arguments;
 
         [Serializable]
@@ -22,11 +26,17 @@ namespace Core.UI
             _arguments = arguments;
         }
 
-        public async void ShowLoadingScreenAndDestroy(Queue<ILoadingOperation> loadingOperations)
+        public LoadingScreen ShowAndGetLoadingScreen(Queue<ILoadingOperation> loadingOperations)
         {
-            LoadingScreen loadingScreen = UnityEngine.Object.Instantiate(_arguments.LoadingScreenPrefabs);
-            await loadingScreen.Load(loadingOperations);
-            UnityEngine.Object.Destroy(loadingScreen);
+            if(_currentLoadingScreen != null)
+                return _currentLoadingScreen;
+
+            _currentLoadingScreen = UnityEngine.Object.Instantiate(_arguments.LoadingScreenPrefabs);
+            return _currentLoadingScreen;
+        }
+        public void ReturnLoadingScreen()
+        {
+            UnityEngine.Object.Destroy(_currentLoadingScreen);
         }
     }
 }

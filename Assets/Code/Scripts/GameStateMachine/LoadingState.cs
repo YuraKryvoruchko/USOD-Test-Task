@@ -1,4 +1,5 @@
-﻿using Core.UI;
+﻿using System.Collections.Generic;
+using Core.UI;
 
 namespace Core
 {
@@ -7,22 +8,28 @@ namespace Core
         private ISaveLoadSystem _saveLoadSystem;
         private IUISystem _uiSystem;
 
-        public LoadingState(ISaveLoadSystem saveLoadSystem, IUISystem uISystem)
+        public LoadingState(ISaveLoadSystem saveLoadSystem, IUISystem uiSystem, GameStateMachine gameStateMachine) : base(gameStateMachine)
         {
             _saveLoadSystem = saveLoadSystem;
+            _uiSystem = uiSystem;
         }
 
         public override void Init()
         {
-            throw new System.NotImplementedException();
         }
-        public override void Process()
+        public async override void Process()
         {
-            throw new System.NotImplementedException();
+            Queue<ILoadingOperation> queue = new Queue<ILoadingOperation>();
+            queue.Enqueue(new LoadingOperation(_saveLoadSystem));
+
+            LoadingScreen loadingScreen = _uiSystem.ShowAndGetLoadingScreen(queue);
+            await loadingScreen.Load(queue);
+            _uiSystem.ReturnLoadingScreen();
+
+            GameStateMachine.ChangeStateTo(GameStateType.Gameplay);
         }
         public override void Deinit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
