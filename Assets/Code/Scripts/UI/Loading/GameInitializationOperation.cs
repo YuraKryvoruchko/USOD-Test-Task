@@ -12,7 +12,9 @@ namespace Core.UI
 
         public async Task Load(Action<float> onProgress, CancellationToken cancellationToken = default)
         {
-            await Task.Delay(GAME_INITIALIZATION_DELAY_IN_MILLISECONDS);
+            onProgress?.Invoke(0.6f);
+            await Task.Delay(GAME_INITIALIZATION_DELAY_IN_MILLISECONDS, cancellationToken);
+            onProgress?.Invoke(1f);
         }
     }
 }
