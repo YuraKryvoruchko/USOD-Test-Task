@@ -5,7 +5,7 @@ namespace Core
 {
     public class SaveLoadSystem : ISaveLoadSystem
     {
-        private const int LOADING_DELAY_IN_MILLISECONDS = 1000;
+        private const int LOADING_DELAY_IN_MILLISECONDS = 5000;
 
         public async Task<GameData> LoadGameData(CancellationToken cancellationToken = default)
         {

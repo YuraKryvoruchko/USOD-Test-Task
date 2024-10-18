@@ -76,3 +76,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiSystemArguments:
     LoadingScreenPrefabs: {fileID: 1381411120568614751, guid: f0c82966b629ae54bb0dbbdea45d7c24, type: 3}
+  _gameStateFactoryArguments:
+    GameUIPrefab: {fileID: 1630063252706881129, guid: a8fd7090be35e574e868a9ae604c870a, type: 3}

@@ -10,6 +10,8 @@ namespace Core.UI
 
         public string Description { get => "Loading game data..."; }
 
+        public event Action<GameData> OnLoadGameData;
+
         public LoadingOperation(ISaveLoadSystem saveLoadSystem)
         {
             _saveLoadSystem = saveLoadSystem;
@@ -19,6 +21,8 @@ namespace Core.UI
             onProgress?.Invoke(0.3f);
             GameData data = await _saveLoadSystem.LoadGameData(cancellationToken);
             onProgress?.Invoke(1f);
+
+            OnLoadGameData?.Invoke(data);
         }
     }
 }
